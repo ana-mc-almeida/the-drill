@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyaxpkywpwsch"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_psop8"]
+[ext_resource type="PackedScene" uid="uid://b8f6wwbymy3in" path="res://scenes/level.tscn" id="2_84bbb"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_psop8")
+
+[node name="Level1" parent="." instance=ExtResource("2_84bbb")]
+offset_left = 574.0
+offset_top = 323.0
+offset_right = 614.0
+offset_bottom = 363.0

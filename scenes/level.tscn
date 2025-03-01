@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8f6wwbymy3in"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_mqcjw"]
+
+[node name="Level" type="GridContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 4
+script = ExtResource("1_mqcjw")
