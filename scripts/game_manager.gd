@@ -1,13 +1,19 @@
 extends Node
 
+var LEVELS_SIZE = [4, 6, 8, 10, 12]
+var GRID_SIZE = 400
+
+var levels: Array
+
 func _ready() -> void:
-	var level1 = get_node("Level1")
-	var level2 = get_node("Level2")
-	var level3 = get_node("Level3")
-	var level4 = get_node("Level4")
-	var level5 = get_node("Level5")
-	level1.generate_grid(400, 4)
-	level2.generate_grid(400, 6)
-	level3.generate_grid(400, 8)
-	level4.generate_grid(400, 10)
-	level5.generate_grid(400, 12)
+	var level_node = preload("res://scenes/level.tscn")
+	var total_levels = len(LEVELS_SIZE)
+	levels = []
+
+	for level_number in range(total_levels - 1, -1, -1):
+		print('building level', level_number)
+		var level = level_node.instantiate()
+		level.name = 'Level ' + str(level_number)
+		level.generate_grid(GRID_SIZE, LEVELS_SIZE[level_number])
+		add_child(level)
+		levels.append(level)
