@@ -1,7 +1,7 @@
 extends Node
 
-var LEVELS_SIZE = [4, 6, 8, 10, 12]
-var GRID_SIZE = 400
+@export var LEVELS_SIZE = [4, 6, 8, 10, 12]
+@export var GRID_SIZE = 400
 
 var levels: Array
 
