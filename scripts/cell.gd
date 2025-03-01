@@ -7,7 +7,12 @@ func _ready() -> void:
 
 func set_grid_position(grid_position: Vector2i) -> void:
 	_grid_position = grid_position
+	
+func get_grid_position() -> Vector2i:
+	return _grid_position
 
 func click() -> void:
-	get_parent().click(_grid_position)
-	visible = false
+	get_parent().click(self)
+	# visible = false
+	#mouse_filter = Control.MOUSE_FILTER_IGNORE
+	

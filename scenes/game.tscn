@@ -6,15 +6,12 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_psop8")
 
+[node name="Level5" parent="." instance=ExtResource("2_84bbb")]
+
+[node name="Level4" parent="." instance=ExtResource("2_84bbb")]
+
+[node name="Level3" parent="." instance=ExtResource("2_84bbb")]
+
 [node name="Level2" parent="." instance=ExtResource("2_84bbb")]
-offset_left = 477.0
-offset_top = 275.0
-offset_right = 477.0
-offset_bottom = 275.0
-columns = 6
 
 [node name="Level1" parent="." instance=ExtResource("2_84bbb")]
-offset_left = 250.0
-offset_top = 72.0
-offset_right = 290.0
-offset_bottom = 112.0
