@@ -1,7 +1,7 @@
 extends Button
 
-var dynamite_sprite
-var pickaxe_sprite
+var dynamite_sprite: Sprite2D
+var pickaxe_sprite: Sprite2D
 
 var _cell_type: CellType = CellType.EMPTY
 var _grid_position: Vector2i

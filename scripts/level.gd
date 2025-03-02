@@ -48,6 +48,10 @@ func generate_grid(grid_size: float, image_path: String, is_preview: bool, node:
 			
 			cell.set_grid_position(cell_position)
 			cell.set_cell_type(_current_matrix[position_to_index(cell_position)])
+			
+			if _current_matrix[position_to_index(cell_position)] != 0:
+				cell.disabled = true
+			
 			cell.set_scale(Vector2(cell_size / cell.size.x, cell_size / cell.size.y))
 			cell.position = Vector2(position.x + i * cell_size, position.y + j * cell_size)
 			
@@ -62,7 +66,6 @@ func generate_grid(grid_size: float, image_path: String, is_preview: bool, node:
 				sprite.scale = Vector2(cell.size.x / tile_width, cell.size.y / tile_height)
 				sprite.position = Vector2(cell.size.x / 2, cell.size.y / 2)
 				cell.add_child(sprite, false, InternalMode.INTERNAL_MODE_FRONT)
-			
 
 			node.add_child(cell)
 			_cells_matrix.append(cell)
