@@ -21,3 +21,11 @@ position = Vector2(724, 434)
 
 [node name="preview5" type="Node2D" parent="Previews"]
 position = Vector2(731, 557)
+
+[node name="Timer" type="RichTextLabel" parent="."]
+offset_left = 924.0
+offset_top = 11.0
+offset_right = 1045.0
+offset_bottom = 51.0
+text = "TIMER"
+scroll_active = false
