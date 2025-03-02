@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgmmh4ca6o5jr"]
+
+[ext_resource type="Texture2D" uid="uid://c1dec5abkoag0" path="res://assets/DYNAMITE.jpg" id="1_4kb8g"]
+
+[node name="Dynamite" type="Sprite2D"]
+texture = ExtResource("1_4kb8g")

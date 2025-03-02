@@ -1,10 +1,17 @@
 extends Button
 
-var _cell_type = CellType.EMPTY
+var dynamite_sprite
+var pickaxe_sprite
+
+var _cell_sprite: Sprite2D
+var _cell_type: CellType = CellType.EMPTY
 var _grid_position: Vector2i
 
 func _ready() -> void:
 	pressed.connect(click)
+	dynamite_sprite = get_node("dynamite")
+	pickaxe_sprite = get_node("pickaxe")
+	update_image_type()
 
 func set_grid_position(grid_position: Vector2i) -> void:
 	_grid_position = grid_position
@@ -25,11 +32,21 @@ func next_cell_type() -> void:
 	_cell_type += 1
 	if _cell_type >= len(CellType.keys()):
 		_cell_type = 0
+	update_image_type()
+
+func update_image_type() -> void:
+	if _cell_type == CellType.DYNAMITE:
+		dynamite_sprite.visible = true
+		pickaxe_sprite.visible = false
+	elif _cell_type == CellType.PICKAXE:
+		dynamite_sprite.visible = false
+		pickaxe_sprite.visible = true
+	else:
+		dynamite_sprite.visible = false
+		pickaxe_sprite.visible = false
 
 func click() -> void:
 	next_cell_type()
 	get_parent().click(self)
-	# visible = false
-	#mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 enum CellType {EMPTY, PICKAXE, DYNAMITE}
