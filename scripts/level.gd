@@ -59,7 +59,7 @@ func generate_grid(grid_size: float, image_path: String) -> void:
 			sprite.scale = Vector2(cell.size.x / tile_width, cell.size.y / tile_height)
 			sprite.position = Vector2(cell.size.x / 2, cell.size.y / 2)
 
-			cell.add_child(sprite)
+			cell.add_child(sprite, false, 1)
 			add_child(cell)
 
 func load_matrix():
