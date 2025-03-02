@@ -113,15 +113,17 @@ func remove_line(line):
 	print('Removing Line ' + str(line))
 	for column in range(_size):
 		var child = _cells_matrix[column * _size + line]
-		if child:
-			remove_child(_cells_matrix[column * _size + line])
+		if is_instance_valid(child):
+			remove_child(child)
+			child.queue_free()
 		
 func remove_column(column):
 	print('Removing column ' + str(column))
 	for line in range(_size):
 		var child = _cells_matrix[column * _size + line]
-		if child:
-			remove_child(_cells_matrix[column * _size + line])
+		if is_instance_valid(child):
+			remove_child(child)
+			child.queue_free()
 
 func update_position(btn: Node):
 	_current_matrix[position_to_index(btn.get_grid_position())] = btn.get_cell_type()
