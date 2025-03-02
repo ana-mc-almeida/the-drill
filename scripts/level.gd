@@ -102,31 +102,31 @@ func check_column(column: int):
 	
 	return same_array(get_column(_matrix_solved, column), get_column(_current_matrix, column))
 	
-func check_new_position(position: Vector2i):
-	if(check_line(position.y)): remove_line(position.y)
-	if(check_column(position.x)): remove_column(position.x)
+func check_new_position(cell_position: Vector2i):
+	if (check_line(cell_position.y)): remove_line(cell_position.y)
+	if (check_column(cell_position.x)): remove_column(cell_position.x)
 	
 func remove_line(line):
-	print('Removing Line '+str(line))
+	print('Removing Line ' + str(line))
 	for column in range(_size):
-		var child = _cells_matrix[column*_size+line]
+		var child = _cells_matrix[column * _size + line]
 		if child:
-			remove_child(_cells_matrix[column*_size+line])
+			remove_child(_cells_matrix[column * _size + line])
 		
 func remove_column(column):
-	print('Removing column '+str(column))
+	print('Removing column ' + str(column))
 	for line in range(_size):
-		var child = _cells_matrix[column*_size+line]
+		var child = _cells_matrix[column * _size + line]
 		if child:
-			remove_child(_cells_matrix[column*_size+line])
+			remove_child(_cells_matrix[column * _size + line])
 
 func update_position(btn: Node):
 	_current_matrix[position_to_index(btn.get_grid_position())] = btn.get_cell_type()
 	printMatrix(_current_matrix) # debug
 	return
 	
-func position_to_index(position: Vector2i) -> int:
-	return position.y * _size + position.x
+func position_to_index(cell_position: Vector2i) -> int:
+	return cell_position.y * _size + cell_position.x
 
 func click(btn: Node) -> void:
 	update_position(btn)

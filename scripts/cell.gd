@@ -3,7 +3,6 @@ extends Button
 var dynamite_sprite
 var pickaxe_sprite
 
-var _cell_sprite: Sprite2D
 var _cell_type: CellType = CellType.EMPTY
 var _grid_position: Vector2i
 
@@ -29,9 +28,10 @@ func index_to_cell_type(index: int) -> CellType:
 	return CellType.keys()[index]
 
 func next_cell_type() -> void:
-	_cell_type += 1
-	if _cell_type >= len(CellType.keys()):
-		_cell_type = 0
+	var next_index = int(_cell_type) + 1
+	if next_index >= len(CellType.keys()):
+		next_index = 0
+	_cell_type = CellType.values()[next_index]
 	update_image_type()
 
 func update_image_type() -> void:
