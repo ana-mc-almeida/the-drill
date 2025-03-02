@@ -12,13 +12,16 @@ func set_grid_position(grid_position: Vector2i) -> void:
 func get_grid_position() -> Vector2i:
 	return _grid_position
 
+func get_cell_type() -> CellType:
+	return _cell_type
+
+func index_to_cell_type(index: int) -> CellType:
+	return CellType.keys()[index]
+
 func next_cell_type() -> void:
-	var index: int = CellType.keys().find(_cell_type)
-	index += 1
-	if index >= len(CellType.keys()):
-		index = 0
-	_cell_type = CellType.keys()[index]
-	print(_cell_type)
+	_cell_type += 1
+	if _cell_type >= len(CellType.keys()):
+		_cell_type = 0
 
 func click() -> void:
 	next_cell_type()
