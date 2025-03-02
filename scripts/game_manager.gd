@@ -26,9 +26,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_current_time += delta
-
 	var minutes: int = int(_current_time / 60)
 	var seconds: int = int(fmod(_current_time, 60))
 	var decimals: int = int(fmod(_current_time, 1) * 100)
-
-	_timer.text = "%02d:%02d:%02d" % [minutes, seconds, decimals]
+	_timer.text = "%02d:%02d.%02d" % [minutes, seconds, decimals]
