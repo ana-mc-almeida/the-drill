@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/cell.gd" id="2_0n57o"]
 
 [node name="Cell" type="Button"]
-offset_right = 136.0
-offset_bottom = 136.0
+clip_contents = true
+offset_right = 133.0
+offset_bottom = 124.0
 script = ExtResource("2_0n57o")

@@ -22,7 +22,7 @@ func next_cell_type() -> void:
 
 func click() -> void:
 	next_cell_type()
-	#get_parent().click(self)
+	get_parent().click(self)
 	# visible = false
 	#mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
