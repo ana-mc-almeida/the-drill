@@ -10,6 +10,11 @@ func printMatrix(matrix): # debug
 		print(matrix.slice(line * _size, line * _size + _size))
 	print('---')
 
+func same_array(array1, array2):
+	for i in range(len(array1)):
+		if array1[i] != array2[i]: return false
+	return true
+
 func get_line(matrix, line):
 	return matrix.slice(line * _size, line * _size + _size)
 
@@ -76,22 +81,22 @@ func initiate(grid_size: float, size: int, image_path: String):
 	generate_grid(grid_size, image_path)
 	
 	printMatrix(_current_matrix)
+	printMatrix(_matrix_solved)
 
 func check_line(line: int):
 	print('Checking line ' + str(line))
 	print(get_line(_matrix_solved, line))
-
-	return get_line(_matrix_solved, line) == get_line(_current_matrix, line)
+	return same_array(get_line(_matrix_solved, line), get_line(_current_matrix, line))
 	
 func check_column(column: int):
 	print('Checking column ' + str(column))
 	print(get_column(_matrix_solved, column))
 	
-	return get_line(_matrix_solved, column) == get_line(_current_matrix, column)
+	return same_array(get_line(_matrix_solved, column), get_line(_current_matrix, column))
 	
-func check_newPosition(position: Vector2i):
-	print(check_line(position.x))
-	print(check_column(position.y))
+func check_new_position(position: Vector2i):
+	print(check_line(position.y))
+	print(check_column(position.x))
 
 func update_position(btn: Node):
 	_current_matrix[position_to_index(btn.get_grid_position())] = btn.get_cell_type()
@@ -103,6 +108,6 @@ func position_to_index(position: Vector2i) -> int:
 
 func click(btn: Node) -> void:
 	update_position(btn)
-	check_newPosition(btn.get_grid_position())
+	check_new_position(btn.get_grid_position())
 	print(name, " ", btn.get_grid_position())
 	# remove_child(btn)
