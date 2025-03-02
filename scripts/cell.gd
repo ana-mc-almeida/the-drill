@@ -6,7 +6,7 @@ var pickaxe_sprite: Sprite2D
 var _cell_type: CellType = CellType.EMPTY
 var _grid_position: Vector2i
 
-func _ready() -> void:
+func initiate() -> void:
 	pressed.connect(click)
 	dynamite_sprite = get_node("dynamite")
 	pickaxe_sprite = get_node("pickaxe")
@@ -23,6 +23,7 @@ func get_cell_type() -> CellType:
 	
 func set_cell_type(cell_type):
 	_cell_type = cell_type
+	update_image_type()
 
 func index_to_cell_type(index: int) -> CellType:
 	return CellType.keys()[index]

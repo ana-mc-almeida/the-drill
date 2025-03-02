@@ -5,6 +5,7 @@ var _matrix_solved
 var _current_matrix
 var _size
 var _cells_matrix = []
+var _cells_preview = []
 var _preview: Node2D
 
 func printMatrix(matrix): # debug
@@ -45,6 +46,7 @@ func generate_grid(grid_size: float, image_path: String, is_preview: bool, node:
 		for j in range(_size):
 			var cell_position = Vector2i(i, j)
 			var cell = cell_scene.instantiate()
+			cell.initiate()
 			
 			cell.set_grid_position(cell_position)
 			cell.set_cell_type(_current_matrix[position_to_index(cell_position)])
@@ -66,9 +68,11 @@ func generate_grid(grid_size: float, image_path: String, is_preview: bool, node:
 				sprite.scale = Vector2(cell.size.x / tile_width, cell.size.y / tile_height)
 				sprite.position = Vector2(cell.size.x / 2, cell.size.y / 2)
 				cell.add_child(sprite, false, InternalMode.INTERNAL_MODE_FRONT)
+				_cells_matrix.append(cell)
+			else:
+				_cells_preview.append(cell)
 
 			node.add_child(cell)
-			_cells_matrix.append(cell)
 
 func load_matrix():
 	var file = "res://levels.json"
@@ -126,15 +130,21 @@ func remove_column(column):
 			child.queue_free()
 
 func update_position(btn: Node):
-	_current_matrix[position_to_index(btn.get_grid_position())] = btn.get_cell_type()
+	var new_cell_type = btn.get_cell_type()
+	_current_matrix[position_to_index(btn.get_grid_position())] = new_cell_type
 	printMatrix(_current_matrix) # debug
+
+	var preview_cell = _cells_preview[position_to_index_preview(btn.get_grid_position())]
+	preview_cell.set_cell_type(new_cell_type)
 	return
 	
 func position_to_index(cell_position: Vector2i) -> int:
 	return cell_position.y * _size + cell_position.x
 
+func position_to_index_preview(cell_position: Vector2i) -> int:
+	return cell_position.x * _size + cell_position.y
+	
 func click(btn: Node) -> void:
 	update_position(btn)
 	check_new_position(btn.get_grid_position())
 	print(name, " ", btn.get_grid_position())
-	# remove_child(btn)
