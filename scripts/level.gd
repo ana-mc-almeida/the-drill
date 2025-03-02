@@ -4,6 +4,7 @@ extends Node2D
 var _matrix_solved
 var _current_matrix
 var _size
+var _cells_matrix = []
 
 func printMatrix(matrix): # debug
 	for line in range(_size):
@@ -61,6 +62,7 @@ func generate_grid(grid_size: float, image_path: String) -> void:
 
 			cell.add_child(sprite, false, 1)
 			add_child(cell)
+			_cells_matrix.append(cell)
 
 func load_matrix():
 	var file = "res://levels.json"
@@ -91,12 +93,27 @@ func check_line(line: int):
 func check_column(column: int):
 	print('Checking column ' + str(column))
 	print(get_column(_matrix_solved, column))
+	print(get_column(_current_matrix, column))
 	
-	return same_array(get_line(_matrix_solved, column), get_line(_current_matrix, column))
+	return same_array(get_column(_matrix_solved, column), get_column(_current_matrix, column))
 	
 func check_new_position(position: Vector2i):
-	print(check_line(position.y))
-	print(check_column(position.x))
+	if(check_line(position.y)): remove_line(position.y)
+	if(check_column(position.x)): remove_column(position.x)
+	
+func remove_line(line):
+	print('Removing Line '+str(line))
+	for column in range(_size):
+		var child = _cells_matrix[column*_size+line]
+		if child:
+			remove_child(_cells_matrix[column*_size+line])
+		
+func remove_column(column):
+	print('Removing column '+str(column))
+	for line in range(_size):
+		var child = _cells_matrix[column*_size+line]
+		if child:
+			remove_child(_cells_matrix[column*_size+line])
 
 func update_position(btn: Node):
 	_current_matrix[position_to_index(btn.get_grid_position())] = btn.get_cell_type()
