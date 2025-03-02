@@ -8,6 +8,7 @@ var _size
 func printMatrix(matrix): # debug
 	for line in range(_size):
 		print(matrix.slice(line * _size, line * _size + _size))
+	print('---')
 
 func get_line(matrix, line):
 	return matrix.slice(line * _size, line * _size + _size)
@@ -42,8 +43,10 @@ func generate_grid(grid_size: float, image_path: String) -> void:
 			sprite.texture = texture
 			sprite.centered = true
 
+			var cell_position = Vector2i(i, j)
 			var cell = cell_scene.instantiate()
-			cell.set_grid_position(Vector2i(i, j))
+			cell.set_grid_position(cell_position)
+			cell.set_cell_type(_current_matrix[position_to_index(cell_position)])
 			cell.set_scale(Vector2(cell_size / cell.size.x, cell_size / cell.size.y))
 			cell.position = Vector2(position.x + i * cell_size, position.y + j * cell_size)
 
@@ -69,10 +72,10 @@ func load_matrix():
 
 func initiate(grid_size: float, size: int, image_path: String):
 	_size = size
-	generate_grid(grid_size, image_path)
 	load_matrix()
+	generate_grid(grid_size, image_path)
 	
-	printMatrix(_matrix_solved)
+	printMatrix(_current_matrix)
 
 func check_line(line: int):
 	print('Checking line ' + str(line))
@@ -102,4 +105,4 @@ func click(btn: Node) -> void:
 	update_position(btn)
 	check_newPosition(btn.get_grid_position())
 	print(name, " ", btn.get_grid_position())
-	#remove_child(btn)
+	# remove_child(btn)

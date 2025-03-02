@@ -14,6 +14,9 @@ func get_grid_position() -> Vector2i:
 
 func get_cell_type() -> CellType:
 	return _cell_type
+	
+func set_cell_type(cell_type):
+	_cell_type = cell_type
 
 func index_to_cell_type(index: int) -> CellType:
 	return CellType.keys()[index]
