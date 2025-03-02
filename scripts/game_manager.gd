@@ -13,7 +13,7 @@ func _ready() -> void:
 	for level_number in range(total_levels - 1, -1, -1):
 		print('building level', level_number)
 		var level = level_node.instantiate()
+		level.initiate(GRID_SIZE, LEVELS_SIZE[level_number])
 		level.name = 'Level ' + str(level_number)
-		level.generate_grid(GRID_SIZE, LEVELS_SIZE[level_number])
 		add_child(level)
 		levels.append(level)
