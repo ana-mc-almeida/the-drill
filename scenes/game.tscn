@@ -4,3 +4,20 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_psop8")
+
+[node name="Previews" type="Node" parent="."]
+
+[node name="preview1" type="Node2D" parent="Previews"]
+position = Vector2(722, 25)
+
+[node name="preview2" type="Node2D" parent="Previews"]
+position = Vector2(718, 181)
+
+[node name="preview3" type="Node2D" parent="Previews"]
+position = Vector2(724, 301)
+
+[node name="preview4" type="Node2D" parent="Previews"]
+position = Vector2(724, 434)
+
+[node name="preview5" type="Node2D" parent="Previews"]
+position = Vector2(731, 557)

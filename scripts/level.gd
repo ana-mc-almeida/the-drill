@@ -5,6 +5,7 @@ var _matrix_solved
 var _current_matrix
 var _size
 var _cells_matrix = []
+var _preview: Node2D
 
 func printMatrix(matrix): # debug
 	for line in range(_size):
@@ -28,40 +29,42 @@ func get_column(matrix, column):
 func get_cell_size(grid_size: float) -> float:
 	return grid_size / _size
 
-func generate_grid(grid_size: float, image_path: String) -> void:
-	var cell_scene = preload("res://scenes/cell.tscn")
+func generate_grid(grid_size: float, image_path: String, is_preview: bool, node: Node2D) -> void:
+	var cell_scene = preload("res://scenes/cell_preview.tscn") if is_preview else preload("res://scenes/cell.tscn")
 	var cell_size = grid_size / _size
 
-	var image = load(image_path).get_image()
-	var tile_width = image.get_width() / _size
-	var tile_height = image.get_height() / _size
+	var tile_width
+	var tile_height
+	var image
+	if image_path:
+		image = load(image_path).get_image()
+		tile_width = image.get_width() / _size
+		tile_height = image.get_height() / _size
 
 	for i in range(_size):
 		for j in range(_size):
-			var tile_region = Rect2(i * tile_width, j * tile_height, tile_width, tile_height)
-			var tile_image = image.get_region(tile_region)
-
-			# Convert the image region to a texture
-			var texture = ImageTexture.create_from_image(tile_image)
-
-			# Create a Sprite2D to display the tile
-			var sprite = Sprite2D.new()
-			sprite.texture = texture
-			sprite.centered = true
-
 			var cell_position = Vector2i(i, j)
 			var cell = cell_scene.instantiate()
+			
 			cell.set_grid_position(cell_position)
 			cell.set_cell_type(_current_matrix[position_to_index(cell_position)])
 			cell.set_scale(Vector2(cell_size / cell.size.x, cell_size / cell.size.y))
 			cell.position = Vector2(position.x + i * cell_size, position.y + j * cell_size)
+			
+			if not is_preview:
+				var tile_region = Rect2(i * tile_width, j * tile_height, tile_width, tile_height)
+				var tile_image = image.get_region(tile_region)
+				var texture = ImageTexture.create_from_image(tile_image)
 
-			# Center the sprite within the cell:
-			sprite.scale = Vector2(cell.size.x / tile_width, cell.size.y / tile_height)
-			sprite.position = Vector2(cell.size.x / 2, cell.size.y / 2)
+				var sprite = Sprite2D.new()
+				sprite.texture = texture
+				sprite.centered = true
+				sprite.scale = Vector2(cell.size.x / tile_width, cell.size.y / tile_height)
+				sprite.position = Vector2(cell.size.x / 2, cell.size.y / 2)
+				cell.add_child(sprite, false, InternalMode.INTERNAL_MODE_FRONT)
+			
 
-			cell.add_child(sprite, false, 1)
-			add_child(cell)
+			node.add_child(cell)
 			_cells_matrix.append(cell)
 
 func load_matrix():
@@ -77,10 +80,12 @@ func load_matrix():
 	_current_matrix = puzzle.empty
 
 
-func initiate(grid_size: float, size: int, image_path: String):
+func initiate(grid_size: float, size: int, image_path: String, preview: Node2D):
 	_size = size
+	_preview = preview
 	load_matrix()
-	generate_grid(grid_size, image_path)
+	generate_grid(grid_size, image_path, false, self)
+	generate_grid(100, "", true, _preview)
 	
 	printMatrix(_current_matrix)
 	printMatrix(_matrix_solved)

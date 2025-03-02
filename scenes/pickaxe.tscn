@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxbm14otk8par"]
-
-[ext_resource type="Texture2D" uid="uid://bsgk0gpv6ulva" path="res://assets/pickaxe.webp" id="1_7gxrl"]
-
-[node name="pickaxe" type="Sprite2D"]
-texture = ExtResource("1_7gxrl")
