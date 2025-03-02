@@ -117,7 +117,7 @@ func remove_line(line):
 	print('Removing Line ' + str(line))
 	for column in range(_size):
 		var child = _cells_matrix[column * _size + line]
-		if is_instance_valid(child):
+		if is_instance_valid(child) and child in get_children():
 			remove_child(child)
 			child.queue_free()
 		
@@ -125,7 +125,7 @@ func remove_column(column):
 	print('Removing column ' + str(column))
 	for line in range(_size):
 		var child = _cells_matrix[column * _size + line]
-		if is_instance_valid(child):
+		if is_instance_valid(child) and child in get_children():
 			remove_child(child)
 			child.queue_free()
 
