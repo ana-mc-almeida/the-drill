@@ -137,5 +137,5 @@ autoplay = true
 [connection signal="pressed" from="Scoreboard/Return" to="Scoreboard" method="_on_return_pressed"]
 [connection signal="pressed" from="Scoreboard/Dificulty" to="Scoreboard" method="change_dificulty"]
 [connection signal="pressed" from="Credits/Return" to="Credits" method="_on_return_pressed"]
-[connection signal="pressed" from="Win/Button" to="Win" method="_on_login_pressed"]
 [connection signal="pressed" from="Win/Button" to="Win" method="_save_score_pressed"]
+[connection signal="pressed" from="Win/Button" to="Win" method="_on_login_pressed"]
