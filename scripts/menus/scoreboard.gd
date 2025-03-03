@@ -1,6 +1,6 @@
 extends Node
 
-var scores = [1000, 20000, 2 , 3,4,5,6,7,8,9,1]
+var scores = []
 var score_scene: PackedScene
 
 func _ready():
@@ -10,7 +10,12 @@ func _ready():
 		node.text = str(score)
 		get_node("Scores/VBoxContainer").add_child(node)
 
-
+func add_score(score: String):
+	scores.append(score)
+	var node = score_scene.instantiate()
+	node.text = score
+	get_node("Scores/VBoxContainer").add_child(node)
+	
 
 func _on_return_pressed() -> void:
 	self.visible = false
