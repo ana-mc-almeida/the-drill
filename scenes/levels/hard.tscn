@@ -5,6 +5,4 @@
 [node name="Hard" type="Node2D"]
 
 [node name="Level" parent="." instance=ExtResource("1_of7od")]
-TOTAL_PUZZLES = 1
-PREVIEWS_START_POSITION = Vector2(50, 10)
-PREVIEWS_MAX_SIZE = 570
+TOTAL_PUZZLES = 4

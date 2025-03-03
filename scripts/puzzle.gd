@@ -184,6 +184,7 @@ func createPreviewResetButton(preview_size):
 	var button = Button.new()
 	button.custom_minimum_size = Vector2(preview_size, preview_size)
 	button.connect("pressed", Callable(self, "clearBoard"))
+	button.flat = true
 	button.name = 'Reset Button'
 	_preview.add_child(button)
 	print('Button Created')

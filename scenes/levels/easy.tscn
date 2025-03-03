@@ -6,4 +6,5 @@
 
 [node name="Level" parent="." instance=ExtResource("1_kmkyb")]
 TOTAL_PUZZLES = 2
-PREVIEWS_MAX_SIZE = 150
+PREVIEWS_START_POSITION = Vector2(250, 10)
+PREVIEWS_MAX_SIZE = 250
