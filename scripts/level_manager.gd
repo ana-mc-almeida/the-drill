@@ -9,6 +9,7 @@ extends Node
 var PUZZLES_SIZE = [4, 6, 8, 10, 12]
 var GRID_SIZE = 400
 
+var _game_manager
 var _timer: RichTextLabel
 var _current_time: float
 var _puzzles: Array
