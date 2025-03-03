@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://badtpfq4swfwd"]
+[gd_scene load_steps=6 format=3 uid="uid://badtpfq4swfwd"]
 
 [ext_resource type="Script" path="res://scripts/menus/play_menu.gd" id="1_2fhuk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_nqmi5"]
 [ext_resource type="Script" path="res://scripts/menus/start_menu.gd" id="2_ufbnd"]
 [ext_resource type="Script" path="res://scripts/menus/scoreboard.gd" id="3_l42sp"]
+[ext_resource type="Script" path="res://scripts/menus/credits.gd" id="5_ilt64"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_nqmi5")
@@ -38,7 +39,7 @@ script = ExtResource("1_2fhuk")
 offset_left = 373.0
 offset_top = 221.0
 offset_right = 445.0
-offset_bottom = 364.0
+offset_bottom = 396.0
 theme_override_constants/separation = 17
 
 [node name="Easy" type="Button" parent="Play/VBoxContainer"]
@@ -61,21 +62,27 @@ text = "Return"
 visible = false
 script = ExtResource("3_l42sp")
 
-[node name="Scores" type="VScrollBar" parent="Scoreboard"]
-offset_left = 327.0
-offset_top = 185.0
-offset_right = 349.0
-offset_bottom = 469.0
-step = 13.78
-page = 5.835
+[node name="Scores" type="ScrollContainer" parent="Scoreboard"]
+offset_left = 317.0
+offset_top = 140.0
+offset_right = 423.0
+offset_bottom = 365.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard/Scores"]
-layout_mode = 0
-offset_right = 159.0
-offset_bottom = 40.0
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="Return" type="Button" parent="Scoreboard"]
+offset_right = 61.0
+offset_bottom = 31.0
+text = "Return"
 
 [node name="Credits" type="Node2D" parent="."]
 visible = false
+script = ExtResource("5_ilt64")
+
+[node name="Return" type="Button" parent="Credits"]
+text = "Return"
 
 [node name="Win" type="Node" parent="."]
 
@@ -86,3 +93,5 @@ visible = false
 [connection signal="pressed" from="Play/VBoxContainer/Medium" to="Play" method="_on_medium_pressed"]
 [connection signal="pressed" from="Play/VBoxContainer/Hard" to="Play" method="_on_hard_pressed"]
 [connection signal="pressed" from="Play/VBoxContainer/Return" to="Play" method="_on_return_pressed"]
+[connection signal="pressed" from="Scoreboard/Return" to="Scoreboard" method="_on_return_pressed"]
+[connection signal="pressed" from="Credits/Return" to="Credits" method="_on_return_pressed"]
