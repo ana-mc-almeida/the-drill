@@ -11,6 +11,7 @@
 script = ExtResource("1_nqmi5")
 
 [node name="StartMenu" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_ufbnd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu"]
@@ -60,14 +61,13 @@ layout_mode = 2
 text = "Return"
 
 [node name="Scoreboard" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_l42sp")
 
 [node name="Scores" type="ScrollContainer" parent="Scoreboard"]
-offset_left = 317.0
-offset_top = 140.0
-offset_right = 423.0
-offset_bottom = 365.0
+offset_left = 192.0
+offset_top = 89.0
+offset_right = 551.0
+offset_bottom = 526.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard/Scores"]
 layout_mode = 2
@@ -90,8 +90,18 @@ visible = false
 script = ExtResource("2_v2wv1")
 
 [node name="Button" type="Button" parent="Win"]
-offset_right = 123.0
-offset_bottom = 38.0
+offset_left = 317.0
+offset_top = 297.0
+offset_right = 440.0
+offset_bottom = 335.0
+text = "Send"
+
+[node name="TextEdit" type="TextEdit" parent="Win"]
+offset_left = 317.0
+offset_top = 140.0
+offset_right = 440.0
+offset_bottom = 178.0
+text = "Your Name"
 
 [connection signal="pressed" from="StartMenu/VBoxContainer/Play" to="StartMenu" method="_on_play_pressed"]
 [connection signal="pressed" from="StartMenu/VBoxContainer/Scoreboard" to="StartMenu" method="_on_scoreboard_pressed"]

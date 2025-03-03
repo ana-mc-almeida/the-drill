@@ -56,7 +56,10 @@ func complete_level():
 
 func _process(delta: float) -> void:
 	_current_time += delta
-	var minutes: int = int(_current_time / 60)
-	var seconds: int = int(fmod(_current_time, 60))
-	var decimals: int = int(fmod(_current_time, 1) * 100)
-	_timer.text = "%02d:%02d.%02d" % [minutes, seconds, decimals]
+	_timer.text = format_score(_current_time)
+
+static func format_score(score: float) -> String:
+	var minutes: int = int(score / 60)
+	var seconds: int = int(fmod(score, 60))
+	var decimals: int = int(fmod(score, 1) * 100)
+	return "%02d:%02d.%02d" % [minutes, seconds, decimals]
