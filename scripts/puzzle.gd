@@ -33,7 +33,7 @@ func get_column(matrix, column):
 func get_cell_size(grid_size: float) -> float:
 	return grid_size / _size
 
-func generate_grid(grid_size: float, image_path: String, is_preview: bool, node: Node2D) -> void:
+func generate_grid(grid_size: float, image_path: String, is_preview: bool, node: Node2D, offset: float) -> void:
 	var cell_scene = preload("res://scenes/cell_preview.tscn") if is_preview else preload("res://scenes/cell.tscn")
 	var cell_size = grid_size / _size
 
@@ -56,12 +56,12 @@ func generate_grid(grid_size: float, image_path: String, is_preview: bool, node:
 			
 			if _current_matrix[position_to_index(cell_position)] != 0:
 				cell.disabled = true
-			
+				
 			cell.set_scale(Vector2(cell_size / cell.size.x, cell_size / cell.size.y))
-			cell.position = Vector2(position.x + i * cell_size, position.y + j * cell_size)
+			cell.position = Vector2(position.x + i * cell_size - offset, position.y + j * cell_size - offset)
 			
 			if not is_preview:
-				var tile_region = Rect2(i * tile_width, j * tile_height, tile_width, tile_height)
+				var tile_region = Rect2(i * tile_width, j * tile_height, tile_width + 5, tile_height + 5)
 				var tile_image = image.get_region(tile_region)
 				var texture = ImageTexture.create_from_image(tile_image)
 
@@ -89,10 +89,11 @@ func load_matrix():
 	_matrix_solved = puzzle.full
 	_current_matrix = puzzle.empty
 
-func initiate(level_number: int, grid_size: float, size: int, image_path: String, preview_size: int, preview_gap: int):
+func initiate(level_number: int, grid_size: float, size: int, image_path: String, preview_size: int,
+	preview_gap: int, offset: float):
 	_size = size
 	load_matrix()
-	generate_grid(grid_size, image_path, false, self)
+	generate_grid(grid_size + offset, image_path, false, self, offset / 2)
 	createPreview(level_number, preview_size, preview_gap)
 	
 	printMatrix(_current_matrix)
@@ -160,6 +161,6 @@ func createPreview(level_number: int, preview_size: int, preview_gap: int):
 
 	_level_manager.get_node('Previews').add_child(preview)
 	
-	generate_grid(preview_size, "", true, preview)
+	generate_grid(preview_size, "", true, preview, 0)
 
 	_preview = preview

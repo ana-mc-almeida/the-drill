@@ -29,6 +29,10 @@ func _ready() -> void:
 	previews.position = Vector2(PREVIEWS_START_POSITION.x, 150 - PREVIEW_GAP - previews_size)
 
 	for puzzle_number in range(TOTAL_PUZZLES - 1, -1, -1):
+		var offset: float
+		if puzzle_number == 0:
+			offset = 30
+			
 		print('building puzzle', puzzle_number)
 		var level = puzzle_node.instantiate()
 		level.set_level_manager(self)
@@ -37,7 +41,8 @@ func _ready() -> void:
 			PUZZLES_SIZE[puzzle_number],
 			"res://assets/" + str(puzzle_number + 1) + ".png",
 			previews_size,
-			PREVIEW_GAP)
+			PREVIEW_GAP,
+			offset)
 		level.name = 'Level ' + str(puzzle_number)
 		get_node("Puzzles").add_child(level)
 		_puzzles.append(level)
