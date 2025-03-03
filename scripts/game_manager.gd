@@ -18,11 +18,10 @@ func _on_FirebaseAuth_login_succeeded(auth):
 	db_ref.delete_data_update.connect(_on_db_data_update)
 
 func _on_db_data_update(resource: Object):
-	var name = resource.data.get("name")
-	
-	if name == null:
-		name = ""
-	scoreboard_scene.add_score(resource.data.time, name,
+	var player_name = resource.data.get("name")
+	if player_name == null:
+		player_name = ""
+	scoreboard_scene.add_score(resource.data.time, player_name,
 		resource.data.mode)
 	
 func _on_FirebaseAuth_login_failed(error_code, message):

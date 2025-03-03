@@ -13,16 +13,16 @@ func update():
 		node.text = LevelManager.format_score(score[0]) + " " + score[1]
 		get_node("Scores/VBoxContainer").add_child(node)
 
-func add_score(score: float, name: String, mode: String):
+func add_score(score: float, player_name: String, mode: String):
 	match mode:
 		"easy":
-			easy_scores.append([score, name])
+			easy_scores.append([score, player_name])
 			easy_scores.sort()
 		"medium":
-			medium_scores.append([score, name])
+			medium_scores.append([score, player_name])
 			medium_scores.sort()
 		"hard":
-			hard_scores.append([score, name])
+			hard_scores.append([score, player_name])
 			hard_scores.sort()
 
 func _on_return_pressed() -> void:
