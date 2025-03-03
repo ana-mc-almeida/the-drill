@@ -5,3 +5,4 @@
 [node name="Easy" type="Node2D"]
 
 [node name="Level" parent="." instance=ExtResource("1_kmkyb")]
+TOTAL_PUZZLES = 3
