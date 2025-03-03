@@ -88,8 +88,8 @@ func load_matrix():
 	var puzzle = puzzles[randi() % puzzles.size()]
 
 	_matrix_solved = puzzle.full
-	_current_matrix = puzzle.empty
-	_correct_matrix = puzzle.empty
+	_current_matrix = puzzle.empty.duplicate()
+	_correct_matrix = puzzle.empty.duplicate()
 
 func initiate(level_number: int, grid_size: float, size: int, image_path: String, preview_size: int,
 	preview_gap: int, offset: float):
@@ -120,9 +120,10 @@ func check_new_position(cell_position: Vector2i):
 func remove_line(line):
 	print('Removing Line ' + str(line))
 	for column in range(_size):
-		var index = column * _size + line
-		_correct_matrix[index] = _current_matrix[index]
-		var child = _cells_matrix[index]
+		var index_cells = column * _size + line
+		var index_matrix = line * _size + column
+		_correct_matrix[index_matrix] = _current_matrix[index_matrix]
+		var child = _cells_matrix[index_cells]
 		if is_instance_valid(child) and child in get_children():
 			remove_child(child)
 			child.queue_free()
@@ -132,9 +133,10 @@ func remove_line(line):
 func remove_column(column):
 	print('Removing column ' + str(column))
 	for line in range(_size):
-		var index = column * _size + line
-		_correct_matrix[index] = _current_matrix[index]
-		var child = _cells_matrix[index]
+		var index_cells = column * _size + line
+		var index_matrix = line * _size + column
+		_correct_matrix[index_matrix] = _current_matrix[index_matrix]
+		var child = _cells_matrix[index_cells]
 		if is_instance_valid(child) and child in get_children():
 			remove_child(child)
 			child.queue_free()
@@ -181,7 +183,6 @@ func createPreviewResetButton(preview_size):
 	print('Creating Reset Button')
 	var button = Button.new()
 	button.custom_minimum_size = Vector2(preview_size, preview_size)
-	button.position = _preview.position
 	button.connect("pressed", Callable(self, "clearBoard"))
 	button.name = 'Reset Button'
 	_preview.add_child(button)
@@ -191,13 +192,17 @@ func clearBoard():
 	print('Cleaning Board')
 	printMatrix(_correct_matrix)
 
-	for j in range(_size):
-		for i in range(_size):
-			var index = position_to_index(Vector2(i, j))
-			var cell_type = _correct_matrix[index]
-			if(cell_type == 0):
-				_cells_matrix[index].set_cell_type(cell_type)
-				_cells_preview[index].set_cell_type(cell_type)
+	for i in range(_size):
+		for j in range(_size):
+			var index1 = position_to_index(Vector2(i, j))
+			var index2 = position_to_index(Vector2(j, i))
+			print(index2)
+			var cell_type = _correct_matrix[index2]
+			print(cell_type)
+			var _cell_in_matrix = _cells_matrix[index1]
+			if is_instance_valid(_cell_in_matrix) and _cell_in_matrix in get_children():
+				_cell_in_matrix.set_cell_type(cell_type)
+			_cells_preview[index1].set_cell_type(cell_type)
 
-	_current_matrix = _correct_matrix
+	_current_matrix = _correct_matrix.duplicate()
 	print('Board Cleard')
