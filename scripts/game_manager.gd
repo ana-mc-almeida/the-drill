@@ -1,3 +1,4 @@
+class_name GameManager
 extends Node
 
 @export var LEVELS_SIZE = [4, 6, 8, 10, 12]
@@ -6,6 +7,7 @@ extends Node
 var _timer: RichTextLabel
 var _current_time: float
 var _levels: Array
+var _completed_levels: int = 0
 
 func _ready() -> void:
 	_current_time = 0
@@ -18,11 +20,19 @@ func _ready() -> void:
 	for level_number in range(total_levels - 1, -1, -1):
 		print('building level', level_number)
 		var level = level_node.instantiate()
+		level.set_game_manager(self)
 		level.initiate(GRID_SIZE, LEVELS_SIZE[level_number], "res://assets/" + str(level_number + 1) + ".png", get_node("Previews").get_children()[level_number])
 		level.name = 'Level ' + str(level_number)
-		add_child(level)
+		get_node("Levels").add_child(level)
 		_levels.append(level)
 
+func complete_level():
+	_completed_levels += 1
+	if _completed_levels == len(_levels):
+		win()
+
+func win(): #TODO
+	print("WIN")
 
 func _process(delta: float) -> void:
 	_current_time += delta

@@ -7,6 +7,10 @@ var _size
 var _cells_matrix = []
 var _cells_preview = []
 var _preview: Node2D
+var _game_manager: GameManager
+
+func set_game_manager(game_manager: GameManager):
+	_game_manager = game_manager
 
 func printMatrix(matrix): # debug
 	for line in range(_size):
@@ -86,7 +90,6 @@ func load_matrix():
 	_matrix_solved = puzzle.full
 	_current_matrix = puzzle.empty
 
-
 func initiate(grid_size: float, size: int, image_path: String, preview: Node2D):
 	_size = size
 	_preview = preview
@@ -136,6 +139,8 @@ func update_position(btn: Node):
 
 	var preview_cell = _cells_preview[position_to_index_preview(btn.get_grid_position())]
 	preview_cell.set_cell_type(new_cell_type)
+	if same_array(_matrix_solved, _current_matrix):
+		_game_manager.complete_level()
 	return
 	
 func position_to_index(cell_position: Vector2i) -> int:
