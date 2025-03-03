@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyaxpkywpwsch"]
+[gd_scene load_steps=12 format=3 uid="uid://dyaxpkywpwsch"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_kf8ht"]
 [ext_resource type="Texture2D" uid="uid://dajvudpgrvwms" path="res://assets/bg_800x600.png" id="2_3l7xd"]
 [ext_resource type="Texture2D" uid="uid://cjkg4it16xujw" path="res://assets/drill.png" id="3_gmyb6"]
+[ext_resource type="Texture2D" uid="uid://db0bv0fg0re02" path="res://assets/watch.png" id="4_u3yp8"]
 [ext_resource type="Script" path="res://scripts/drill.gd" id="4_wkk8s"]
+[ext_resource type="FontFile" uid="uid://c4yyvelcp248e" path="res://fonts/metal-old-font/MetalOld-XGEzo.otf" id="5_sv1ra"]
 [ext_resource type="Texture2D" uid="uid://bmubnh0tqucqg" path="res://assets/drill3.1.png" id="5_tb7vu"]
 [ext_resource type="Texture2D" uid="uid://byl8vgnnoagsm" path="res://assets/paper2.png" id="6_x6med"]
 [ext_resource type="AudioStream" uid="uid://jbsghegilml3" path="res://sounds/game_music.wav" id="7_4vg2w"]
@@ -22,11 +24,18 @@ centered = false
 position = Vector2(360, 350)
 texture = ExtResource("9_rf73o")
 
+[node name="Watch" type="Sprite2D" parent="."]
+position = Vector2(704, 89)
+texture = ExtResource("4_u3yp8")
+
 [node name="Timer" type="RichTextLabel" parent="."]
-offset_left = 676.0
-offset_top = 59.0
-offset_right = 797.0
-offset_bottom = 99.0
+modulate = Color(0.721569, 0.54902, 0.243137, 1)
+offset_left = 655.0
+offset_top = 83.0
+offset_right = 776.0
+offset_bottom = 123.0
+theme_override_fonts/normal_font = ExtResource("5_sv1ra")
+theme_override_font_sizes/normal_font_size = 27
 text = "TIMER"
 scroll_active = false
 
@@ -55,3 +64,21 @@ autoplay = true
 
 [node name="Drill Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_nojmp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.175018, 0.105653, 0.0230352, 1)
+offset_left = 608.0
+offset_top = 278.0
+offset_right = 763.0
+offset_bottom = 522.0
+theme_override_fonts/normal_font = ExtResource("5_sv1ra")
+theme_override_font_sizes/normal_font_size = 16
+text = "Each cell: pickaxe or dynamite
+
+Max 2 same symbols adjacent (vertically/horizontally)
+
+Equal pickaxes & dynamites per row/column
+
+No identical rows/columns
+
+Have fun?"
