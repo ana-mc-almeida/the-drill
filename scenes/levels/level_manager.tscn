@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyaxpkywpwsch"]
+[gd_scene load_steps=7 format=3 uid="uid://dyaxpkywpwsch"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_kf8ht"]
 [ext_resource type="Texture2D" uid="uid://dajvudpgrvwms" path="res://assets/bg_800x600.png" id="2_3l7xd"]
+[ext_resource type="Texture2D" uid="uid://cjkg4it16xujw" path="res://assets/drill.png" id="3_gmyb6"]
+[ext_resource type="Texture2D" uid="uid://c5jm75t7bsedi" path="res://icon.svg" id="3_x6vdy"]
+[ext_resource type="Script" path="res://scripts/drill.gd" id="4_wkk8s"]
+[ext_resource type="Texture2D" uid="uid://byl8vgnnoagsm" path="res://assets/paper2.png" id="6_x6med"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_kf8ht")
@@ -23,3 +27,17 @@ scroll_active = false
 
 [node name="Puzzles" type="Node2D" parent="."]
 position = Vector2(160, 150)
+
+[node name="Drill progress" type="Sprite2D" parent="."]
+position = Vector2(86, 329)
+texture = ExtResource("3_gmyb6")
+
+[node name="Drill" type="Sprite2D" parent="."]
+position = Vector2(91, 73)
+texture = ExtResource("3_x6vdy")
+script = ExtResource("4_wkk8s")
+_max_distance = 440.0
+
+[node name="Paper" type="Sprite2D" parent="."]
+position = Vector2(687, 389)
+texture = ExtResource("6_x6med")

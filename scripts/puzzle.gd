@@ -138,7 +138,7 @@ func update_position(btn: Node):
 	var preview_cell = _cells_preview[position_to_index_preview(btn.get_grid_position())]
 	preview_cell.set_cell_type(new_cell_type)
 	if same_array(_matrix_solved, _current_matrix):
-		_level_manager.complete_level()
+		_level_manager.complete_puzzle()
 	return
 	
 func position_to_index(cell_position: Vector2i) -> int:

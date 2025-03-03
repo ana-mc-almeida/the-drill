@@ -5,5 +5,5 @@
 [node name="Easy" type="Node2D"]
 
 [node name="Level" parent="." instance=ExtResource("1_kmkyb")]
-TOTAL_PUZZLES = 1
+TOTAL_PUZZLES = 2
 PREVIEWS_MAX_SIZE = 150

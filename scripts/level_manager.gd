@@ -19,7 +19,7 @@ var _dificulty = 'easy' # TODO: FIXME
 func _ready() -> void:
 	_current_time = 0
 	_timer = get_node("Timer")
-
+	get_node("Drill").set_total_puzzles(TOTAL_PUZZLES)
 	var puzzle_node = preload("res://scenes/puzzle.tscn")
 	_puzzles = []
 
@@ -48,8 +48,9 @@ func set_game_manager(game_manager: GameManager):
 func calculate_previews_size(total_puzzles: int):
 	return (float(PREVIEWS_MAX_SIZE) - (PREVIEW_GAP * (total_puzzles - 1))) / total_puzzles
 
-func complete_level():
+func complete_puzzle():
 	_completed_puzzles += 1
+	get_node("Drill").drill()
 	if _completed_puzzles == TOTAL_PUZZLES:
 		_game_manager.win(_current_time, _dificulty)
 		queue_free()
