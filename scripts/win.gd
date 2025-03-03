@@ -11,11 +11,7 @@ func _save_score_pressed():
 	var db_ref = Firebase.Database.get_database_reference("scores")
 	print('Got database reference' if (db_ref) else 'Error getting db_ref') # debug
 
-	var player_name = _name_text
-	if _name_text.text == null:
-		player_name = _name_text.placeholder_text
-		
-	db_ref.push({'name': player_name, 'time': _score, 'mode': _dificulty})
+	db_ref.push({'name': _name_text.text, 'time': _score, 'mode': _dificulty})
 	self.visible = false
 	get_node("../StartMenu").visible = true
 

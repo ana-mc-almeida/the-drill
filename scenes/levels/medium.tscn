@@ -5,3 +5,4 @@
 [node name="Medium" type="Node2D"]
 
 [node name="Level" parent="." instance=ExtResource("1_v8qs6")]
+TOTAL_PUZZLES = 1

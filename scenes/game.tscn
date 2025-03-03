@@ -84,9 +84,18 @@ layout_mode = 2
 theme_override_constants/separation = 17
 
 [node name="Return" type="Button" parent="Scoreboard"]
-offset_right = 61.0
-offset_bottom = 31.0
+offset_left = 363.0
+offset_top = 454.0
+offset_right = 424.0
+offset_bottom = 485.0
 text = "Return"
+
+[node name="Dificulty" type="Button" parent="Scoreboard"]
+offset_left = 627.0
+offset_top = 273.0
+offset_right = 699.0
+offset_bottom = 304.0
+text = "Dificulty"
 
 [node name="Credits" type="Node2D" parent="."]
 visible = false
@@ -121,6 +130,7 @@ text = "Your Name"
 [connection signal="pressed" from="Play/VBoxContainer/Hard" to="Play" method="_on_hard_pressed"]
 [connection signal="pressed" from="Play/VBoxContainer/Return" to="Play" method="_on_return_pressed"]
 [connection signal="pressed" from="Scoreboard/Return" to="Scoreboard" method="_on_return_pressed"]
+[connection signal="pressed" from="Scoreboard/Dificulty" to="Scoreboard" method="change_dificulty"]
 [connection signal="pressed" from="Credits/Return" to="Credits" method="_on_return_pressed"]
 [connection signal="pressed" from="Win/Button" to="Win" method="_on_login_pressed"]
 [connection signal="pressed" from="Win/Button" to="Win" method="_save_score_pressed"]

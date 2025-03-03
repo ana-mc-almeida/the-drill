@@ -42,6 +42,9 @@ func _ready() -> void:
 		get_node("Puzzles").add_child(level)
 		_puzzles.append(level)
 
+func set_dificulty(dificulty: String) -> void:
+	_dificulty = dificulty
+
 func set_game_manager(game_manager: GameManager):
 	_game_manager = game_manager
 

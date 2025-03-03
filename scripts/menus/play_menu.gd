@@ -7,16 +7,16 @@ func _ready():
 
 func _on_easy_pressed() -> void:
 	self.visible = false
-	_game_manager.play(preload("res://scenes/levels/easy.tscn"))
+	_game_manager.play(preload("res://scenes/levels/easy.tscn"), "easy")
 
 func _on_medium_pressed() -> void:
 	self.visible = false
-	_game_manager.play(preload("res://scenes/levels/medium.tscn"))
+	_game_manager.play(preload("res://scenes/levels/medium.tscn"), "medium")
 
 
 func _on_hard_pressed() -> void:
 	self.visible = false
-	_game_manager.play(preload("res://scenes/levels/hard.tscn"))
+	_game_manager.play(preload("res://scenes/levels/hard.tscn"), "hard")
 
 func _on_return_pressed() -> void:
 	self.visible = false

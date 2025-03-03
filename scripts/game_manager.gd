@@ -28,9 +28,10 @@ func _on_FirebaseAuth_login_failed(error_code, message):
 	print("error code: " + str(error_code))
 	print("message: " + str(message))
 
-func play(scene: PackedScene):
+func play(scene: PackedScene, dificulty: String):
 	var node = scene.instantiate()
 	node.get_node("Level").set_game_manager(self)
+	node.get_node("Level").set_dificulty(dificulty)
 	get_tree().root.add_child(node)
 	
 func win(score: float, difficulty: String):
