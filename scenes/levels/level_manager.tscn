@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyaxpkywpwsch"]
+[gd_scene load_steps=10 format=3 uid="uid://dyaxpkywpwsch"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_kf8ht"]
 [ext_resource type="Texture2D" uid="uid://dajvudpgrvwms" path="res://assets/bg_800x600.png" id="2_3l7xd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://byl8vgnnoagsm" path="res://assets/paper2.png" id="6_x6med"]
 [ext_resource type="AudioStream" uid="uid://jbsghegilml3" path="res://sounds/game_music.wav" id="7_4vg2w"]
 [ext_resource type="AudioStream" uid="uid://kdgdwgyne7be" path="res://sounds/drill.wav" id="8_nojmp"]
+[ext_resource type="Texture2D" uid="uid://ccd3h1dui65fk" path="res://assets/alien.png" id="9_rf73o"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_kf8ht")
@@ -16,6 +17,10 @@ script = ExtResource("1_kf8ht")
 position = Vector2(3, -3)
 texture = ExtResource("2_3l7xd")
 centered = false
+
+[node name="Alien" type="Sprite2D" parent="."]
+position = Vector2(360, 350)
+texture = ExtResource("9_rf73o")
 
 [node name="Timer" type="RichTextLabel" parent="."]
 offset_left = 676.0
