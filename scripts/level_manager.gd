@@ -40,6 +40,9 @@ func _ready() -> void:
 		get_node("Puzzles").add_child(level)
 		_puzzles.append(level)
 
+func set_game_manager(game_manager: GameManager):
+	_game_manager = game_manager
+
 func calculate_previews_size(total_puzzles: int):
 	return (float(PREVIEWS_MAX_SIZE) - (PREVIEW_GAP * (total_puzzles - 1))) / total_puzzles
 

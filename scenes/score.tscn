@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cwf8mclwc608a"]
+
+[node name="Score" type="RichTextLabel"]
+offset_right = 68.0
+offset_bottom = 25.0
+text = "00:00.00"
