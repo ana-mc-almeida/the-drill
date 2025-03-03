@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1dec5abkoag0"
-path="res://.godot/imported/DYNAMITE.jpg-913922cee54fcca71832a1cb2823887a.ctex"
+uid="uid://vkgjv5k3ds50"
+path="res://.godot/imported/pickaxe_86x82.png-ef94edb0a768849af09706c1bbeaebed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/DYNAMITE.jpg"
-dest_files=["res://.godot/imported/DYNAMITE.jpg-913922cee54fcca71832a1cb2823887a.ctex"]
+source_file="res://assets/pickaxe_86x82.png"
+dest_files=["res://.godot/imported/pickaxe_86x82.png-ef94edb0a768849af09706c1bbeaebed.ctex"]
 
 [params]
 

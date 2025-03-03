@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ytbhlru5byom"
-path="res://.godot/imported/1.png-c9a8e694d0d275633d567702fb508122.ctex"
+uid="uid://cghbodosvfdme"
+path="res://.godot/imported/terra_400x400.png-95fd5010cb831a2817d10c26d132964b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/1.png"
-dest_files=["res://.godot/imported/1.png-c9a8e694d0d275633d567702fb508122.ctex"]
+source_file="res://assets/terra_400x400.png"
+dest_files=["res://.godot/imported/terra_400x400.png-95fd5010cb831a2817d10c26d132964b.ctex"]
 
 [params]
 

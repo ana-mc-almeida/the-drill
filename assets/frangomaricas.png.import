@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsgk0gpv6ulva"
-path="res://.godot/imported/pickaxe.webp-136fb17faf96d0625cc5fe291fe2f198.ctex"
+uid="uid://c7wvdtdc76qwt"
+path="res://.godot/imported/frangomaricas.png-118b56058f5a8421bb1fb664c518c155.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pickaxe.webp"
-dest_files=["res://.godot/imported/pickaxe.webp-136fb17faf96d0625cc5fe291fe2f198.ctex"]
+source_file="res://assets/frangomaricas.png"
+dest_files=["res://.godot/imported/frangomaricas.png-118b56058f5a8421bb1fb664c518c155.ctex"]
 
 [params]
 

@@ -7,6 +7,10 @@ var _size
 var _cells_matrix = []
 var _cells_preview = []
 var _preview: Node2D
+var _game_manager: GameManager
+
+func set_game_manager(game_manager: GameManager):
+	_game_manager = game_manager
 
 func printMatrix(matrix): # debug
 	for line in range(_size):
@@ -86,13 +90,11 @@ func load_matrix():
 	_matrix_solved = puzzle.full
 	_current_matrix = puzzle.empty
 
-
-func initiate(grid_size: float, size: int, image_path: String, preview: Node2D):
+func initiate(level_number: int, grid_size: float, size: int, image_path: String, preview_size: int, preview_gap: int):
 	_size = size
-	_preview = preview
 	load_matrix()
 	generate_grid(grid_size, image_path, false, self)
-	generate_grid(100, "", true, _preview)
+	createPreview(level_number, preview_size, preview_gap)
 	
 	printMatrix(_current_matrix)
 	printMatrix(_matrix_solved)
@@ -136,6 +138,8 @@ func update_position(btn: Node):
 
 	var preview_cell = _cells_preview[position_to_index_preview(btn.get_grid_position())]
 	preview_cell.set_cell_type(new_cell_type)
+	if same_array(_matrix_solved, _current_matrix):
+		_game_manager.complete_level()
 	return
 	
 func position_to_index(cell_position: Vector2i) -> int:
@@ -148,3 +152,15 @@ func click(btn: Node) -> void:
 	update_position(btn)
 	check_new_position(btn.get_grid_position())
 	print(name, " ", btn.get_grid_position())
+
+func createPreview(level_number: int, preview_size: int, preview_gap: int):
+	var preview = Node2D.new()
+	var position_x = preview_gap * level_number
+	preview.position.x = position_x + level_number * preview_size
+	preview.name = 'Preview' + str(level_number)
+
+	_game_manager.get_node('Previews').add_child(preview)
+	
+	generate_grid(preview_size, "", true, preview)
+
+	_preview = preview

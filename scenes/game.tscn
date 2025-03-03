@@ -1,31 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyaxpkywpwsch"]
+[gd_scene load_steps=3 format=3 uid="uid://dyaxpkywpwsch"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_psop8"]
+[ext_resource type="Texture2D" uid="uid://dajvudpgrvwms" path="res://assets/bg_800x600.png" id="2_it83t"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_psop8")
+LEVELS_SIZE = [4, 6, 8]
 
-[node name="Previews" type="Node" parent="."]
-
-[node name="preview1" type="Node2D" parent="Previews"]
-position = Vector2(722, 25)
-
-[node name="preview2" type="Node2D" parent="Previews"]
-position = Vector2(718, 181)
-
-[node name="preview3" type="Node2D" parent="Previews"]
-position = Vector2(724, 301)
-
-[node name="preview4" type="Node2D" parent="Previews"]
-position = Vector2(724, 434)
-
-[node name="preview5" type="Node2D" parent="Previews"]
-position = Vector2(731, 557)
+[node name="Bg800x600" type="Sprite2D" parent="."]
+position = Vector2(3, -3)
+texture = ExtResource("2_it83t")
+centered = false
 
 [node name="Timer" type="RichTextLabel" parent="."]
-offset_left = 924.0
-offset_top = 11.0
-offset_right = 1045.0
-offset_bottom = 51.0
+offset_left = 676.0
+offset_top = 59.0
+offset_right = 797.0
+offset_bottom = 99.0
 text = "TIMER"
 scroll_active = false
+
+[node name="Previews" type="Node2D" parent="."]
+
+[node name="Levels" type="Node2D" parent="."]
+position = Vector2(160, 150)
