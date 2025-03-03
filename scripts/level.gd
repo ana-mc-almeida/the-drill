@@ -90,12 +90,11 @@ func load_matrix():
 	_matrix_solved = puzzle.full
 	_current_matrix = puzzle.empty
 
-func initiate(grid_size: float, size: int, image_path: String, preview: Node2D):
+func initiate(level_number: int, grid_size: float, size: int, image_path: String, preview_size: int, preview_gap: int):
 	_size = size
-	_preview = preview
 	load_matrix()
 	generate_grid(grid_size, image_path, false, self)
-	generate_grid(100, "", true, _preview)
+	createPreview(level_number, preview_size, preview_gap)
 	
 	printMatrix(_current_matrix)
 	printMatrix(_matrix_solved)
@@ -153,3 +152,15 @@ func click(btn: Node) -> void:
 	update_position(btn)
 	check_new_position(btn.get_grid_position())
 	print(name, " ", btn.get_grid_position())
+
+func createPreview(level_number: int, preview_size: int, preview_gap: int):
+	var preview = Node2D.new()
+	var position_x = preview_gap * level_number
+	preview.position.x = position_x + level_number * preview_size
+	preview.name = 'Preview' + str(level_number)
+
+	_game_manager.get_node('Previews').add_child(preview)
+	
+	generate_grid(preview_size, "", true, preview)
+
+	_preview = preview
