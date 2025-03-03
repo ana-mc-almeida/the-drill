@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://badtpfq4swfwd"]
+[gd_scene load_steps=11 format=3 uid="uid://badtpfq4swfwd"]
 
 [ext_resource type="Script" path="res://scripts/menus/play_menu.gd" id="1_2fhuk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_nqmi5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/win.gd" id="2_v2wv1"]
 [ext_resource type="Script" path="res://scripts/menus/scoreboard.gd" id="3_l42sp"]
 [ext_resource type="Texture2D" uid="uid://crt4c3wo1mela" path="res://assets/title_screen_buttons.png" id="4_u5p1v"]
+[ext_resource type="FontFile" uid="uid://d3de1i4svbyqq" path="res://fonts/tribal-font/Tribal-WZ1Y.ttf" id="5_b7i6l"]
 [ext_resource type="Script" path="res://scripts/menus/credits.gd" id="5_ilt64"]
 [ext_resource type="AudioStream" uid="uid://bhr5eg54pvgyo" path="res://sounds/menu.wav" id="9_vlyim"]
 
@@ -21,27 +22,40 @@ centered = false
 script = ExtResource("2_ufbnd")
 
 [node name="TitleScreenButtons" type="Sprite2D" parent="StartMenu"]
-position = Vector2(164, 365)
+position = Vector2(157.5, 425)
 texture = ExtResource("4_u5p1v")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu"]
-offset_left = 47.0
-offset_top = 242.0
-offset_right = 280.0
-offset_bottom = 491.0
+offset_left = 40.5
+offset_top = 302.0
+offset_right = 273.5
+offset_bottom = 551.0
+scale = Vector2(0.993158, 0.943608)
 theme_override_constants/separation = 75
 
 [node name="Play" type="Button" parent="StartMenu/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_b7i6l")
+theme_override_font_sizes/font_size = 25
 text = "Play"
+flat = true
 
 [node name="Scoreboard" type="Button" parent="StartMenu/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_b7i6l")
+theme_override_font_sizes/font_size = 25
 text = "Scoreboard"
+flat = true
 
 [node name="Credits" type="Button" parent="StartMenu/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_b7i6l")
+theme_override_font_sizes/font_size = 25
 text = "Credits"
+flat = true
 
 [node name="Play" type="Node2D" parent="."]
 visible = false
@@ -71,31 +85,30 @@ layout_mode = 2
 text = "Return"
 
 [node name="Scoreboard" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_l42sp")
 
 [node name="Scores" type="ScrollContainer" parent="Scoreboard"]
-offset_left = 200.0
-offset_top = 194.0
-offset_right = 559.0
-offset_bottom = 477.0
+offset_left = 325.0
+offset_top = 269.0
+offset_right = 611.0
+offset_bottom = 529.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard/Scores"]
 layout_mode = 2
 theme_override_constants/separation = 17
 
 [node name="Return" type="Button" parent="Scoreboard"]
-offset_left = 363.0
-offset_top = 484.0
-offset_right = 424.0
-offset_bottom = 515.0
+offset_left = 429.0
+offset_top = 542.0
+offset_right = 490.0
+offset_bottom = 573.0
 text = "Return"
 
 [node name="Dificulty" type="Button" parent="Scoreboard"]
 offset_left = 625.0
-offset_top = 321.0
+offset_top = 376.0
 offset_right = 697.0
-offset_bottom = 352.0
+offset_bottom = 407.0
 text = "Dificulty"
 
 [node name="Credits" type="Node2D" parent="."]
@@ -137,5 +150,5 @@ autoplay = true
 [connection signal="pressed" from="Scoreboard/Return" to="Scoreboard" method="_on_return_pressed"]
 [connection signal="pressed" from="Scoreboard/Dificulty" to="Scoreboard" method="change_dificulty"]
 [connection signal="pressed" from="Credits/Return" to="Credits" method="_on_return_pressed"]
-[connection signal="pressed" from="Win/Button" to="Win" method="_on_login_pressed"]
 [connection signal="pressed" from="Win/Button" to="Win" method="_save_score_pressed"]
+[connection signal="pressed" from="Win/Button" to="Win" method="_on_login_pressed"]

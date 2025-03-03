@@ -1,6 +1,10 @@
-[gd_scene format=3 uid="uid://cyk2ry1m8ixe7"]
+[gd_scene load_steps=2 format=3 uid="uid://cyk2ry1m8ixe7"]
+
+[ext_resource type="FontFile" uid="uid://c4yyvelcp248e" path="res://fonts/metal-old-font/MetalOld-XGEzo.otf" id="1_g24cm"]
 
 [node name="Score" type="Label"]
 offset_right = 68.0
 offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("1_g24cm")
+theme_override_font_sizes/font_size = 25
 text = "00:00.00"
