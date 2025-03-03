@@ -4,9 +4,11 @@ extends Node
 var db_email = 'speedjam9@gmail.com'
 var db_pass = '5KdpvkTrZQWy6g=='
 var scoreboard_scene: Scoreboard
+var audio: AudioStreamPlayer
 
 func _ready():
 	scoreboard_scene = get_node("Scoreboard")
+	audio = get_node("AudioStreamPlayer")
 	Firebase.Auth.login_succeeded.connect(_on_FirebaseAuth_login_succeeded)
 	Firebase.Auth.login_failed.connect(_on_FirebaseAuth_login_failed)
 	Firebase.Auth.login_with_email_and_password(db_email, db_pass)
@@ -29,12 +31,14 @@ func _on_FirebaseAuth_login_failed(error_code, message):
 	print("message: " + str(message))
 
 func play(scene: PackedScene, dificulty: String):
+	audio.stop()
 	var node = scene.instantiate()
 	node.get_node("Level").set_game_manager(self)
 	node.get_node("Level").set_dificulty(dificulty)
 	get_tree().root.add_child(node)
 	
 func win(score: float, difficulty: String):
+	audio.play()
 	var win_node = get_node('Win')
 	win_node.set_score(score, difficulty)
 	win_node.visible = true

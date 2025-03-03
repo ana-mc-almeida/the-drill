@@ -14,11 +14,13 @@ var _timer: RichTextLabel
 var _current_time: float
 var _puzzles: Array
 var _completed_puzzles: int = 0
-var _dificulty = 'easy' # TODO: FIXME
+var _dificulty: String
+var _audio: AudioStreamPlayer
 
 func _ready() -> void:
 	_current_time = 0
 	_timer = get_node("Timer")
+	_audio = get_node("Drill Sound")
 	get_node("Drill").set_total_puzzles(TOTAL_PUZZLES)
 	var puzzle_node = preload("res://scenes/puzzle.tscn")
 	_puzzles = []
@@ -59,6 +61,7 @@ func calculate_previews_size(total_puzzles: int):
 func complete_puzzle():
 	_completed_puzzles += 1
 	get_node("Drill").drill()
+	_audio.play()
 	if _completed_puzzles == TOTAL_PUZZLES:
 		_game_manager.win(_current_time, _dificulty)
 		queue_free()
