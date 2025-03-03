@@ -8,6 +8,7 @@ var _timer: RichTextLabel
 var _current_time: float
 var _levels: Array
 var _completed_levels: int = 0
+var _full_level: Node
 
 func _ready() -> void:
 	_current_time = 0
@@ -29,11 +30,10 @@ func _ready() -> void:
 func complete_level():
 	_completed_levels += 1
 	if _completed_levels == len(_levels):
-		win()
+		win(_current_time)
 
-func win(): #TODO
-	print("WIN")
-
+func win(score: float):
+	pass
 func _process(delta: float) -> void:
 	_current_time += delta
 	var minutes: int = int(_current_time / 60)
