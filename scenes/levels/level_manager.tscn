@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyaxpkywpwsch"]
+
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_kf8ht"]
+[ext_resource type="Texture2D" uid="uid://dajvudpgrvwms" path="res://assets/bg_800x600.png" id="2_3l7xd"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_kf8ht")
+
+[node name="Bg800x600" type="Sprite2D" parent="."]
+position = Vector2(3, -3)
+texture = ExtResource("2_3l7xd")
+centered = false
+
+[node name="Timer" type="RichTextLabel" parent="."]
+offset_left = 676.0
+offset_top = 59.0
+offset_right = 797.0
+offset_bottom = 99.0
+text = "TIMER"
+scroll_active = false
+
+[node name="Previews" type="Node2D" parent="."]
+
+[node name="Puzzles" type="Node2D" parent="."]
+position = Vector2(160, 150)

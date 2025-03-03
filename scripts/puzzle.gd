@@ -1,4 +1,3 @@
-class_name GridCell
 extends Node2D
 
 var _matrix_solved
@@ -7,10 +6,10 @@ var _size
 var _cells_matrix = []
 var _cells_preview = []
 var _preview: Node2D
-var _game_manager: GameManager
+var _level_manager: LevelManager
 
-func set_game_manager(game_manager: GameManager):
-	_game_manager = game_manager
+func set_level_manager(level_manager: LevelManager):
+	_level_manager = level_manager
 
 func printMatrix(matrix): # debug
 	for line in range(_size):
@@ -139,7 +138,7 @@ func update_position(btn: Node):
 	var preview_cell = _cells_preview[position_to_index_preview(btn.get_grid_position())]
 	preview_cell.set_cell_type(new_cell_type)
 	if same_array(_matrix_solved, _current_matrix):
-		_game_manager.complete_level()
+		_level_manager.complete_level()
 	return
 	
 func position_to_index(cell_position: Vector2i) -> int:
@@ -159,7 +158,7 @@ func createPreview(level_number: int, preview_size: int, preview_gap: int):
 	preview.position.x = position_x + level_number * preview_size
 	preview.name = 'Preview' + str(level_number)
 
-	_game_manager.get_node('Previews').add_child(preview)
+	_level_manager.get_node('Previews').add_child(preview)
 	
 	generate_grid(preview_size, "", true, preview)
 
