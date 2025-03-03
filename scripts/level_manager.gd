@@ -9,11 +9,12 @@ extends Node
 var PUZZLES_SIZE = [4, 6, 8, 10, 12]
 var GRID_SIZE = 400
 
-var _game_manager
+var _game_manager: GameManager
 var _timer: RichTextLabel
 var _current_time: float
 var _puzzles: Array
 var _completed_puzzles: int = 0
+var _dificulty = 'easy' # TODO: FIXME
 
 func _ready() -> void:
 	_current_time = 0
@@ -49,8 +50,9 @@ func calculate_previews_size(total_puzzles: int):
 
 func complete_level():
 	_completed_puzzles += 1
-	#if _completed_puzzles == len(_puzzles):
-		#_game_manager.win(_current_time, _dificulty)
+	if _completed_puzzles == TOTAL_PUZZLES:
+		_game_manager.win(_current_time, _dificulty)
+		queue_free()
 
 func _process(delta: float) -> void:
 	_current_time += delta

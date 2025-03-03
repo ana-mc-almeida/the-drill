@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://badtpfq4swfwd"]
+[gd_scene load_steps=7 format=3 uid="uid://badtpfq4swfwd"]
 
 [ext_resource type="Script" path="res://scripts/menus/play_menu.gd" id="1_2fhuk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_nqmi5"]
 [ext_resource type="Script" path="res://scripts/menus/start_menu.gd" id="2_ufbnd"]
+[ext_resource type="Script" path="res://scripts/win.gd" id="2_v2wv1"]
 [ext_resource type="Script" path="res://scripts/menus/scoreboard.gd" id="3_l42sp"]
 [ext_resource type="Script" path="res://scripts/menus/credits.gd" id="5_ilt64"]
 
@@ -84,7 +85,13 @@ script = ExtResource("5_ilt64")
 [node name="Return" type="Button" parent="Credits"]
 text = "Return"
 
-[node name="Win" type="Node" parent="."]
+[node name="Win" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_v2wv1")
+
+[node name="Button" type="Button" parent="Win"]
+offset_right = 123.0
+offset_bottom = 38.0
 
 [connection signal="pressed" from="StartMenu/VBoxContainer/Play" to="StartMenu" method="_on_play_pressed"]
 [connection signal="pressed" from="StartMenu/VBoxContainer/Scoreboard" to="StartMenu" method="_on_scoreboard_pressed"]
@@ -95,3 +102,5 @@ text = "Return"
 [connection signal="pressed" from="Play/VBoxContainer/Return" to="Play" method="_on_return_pressed"]
 [connection signal="pressed" from="Scoreboard/Return" to="Scoreboard" method="_on_return_pressed"]
 [connection signal="pressed" from="Credits/Return" to="Credits" method="_on_return_pressed"]
+[connection signal="pressed" from="Win/Button" to="Win" method="_on_login_pressed"]
+[connection signal="pressed" from="Win/Button" to="Win" method="_save_score_pressed"]

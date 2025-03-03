@@ -15,10 +15,18 @@ run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
+
 [display]
 
 window/size/viewport_width=800
 window/size/viewport_height=600
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg", "res://addons/http-sse-client/plugin.cfg")
 
 [rendering]
 
