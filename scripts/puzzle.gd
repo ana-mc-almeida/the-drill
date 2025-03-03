@@ -1,7 +1,8 @@
 extends Node2D
 
-var _matrix_solved
-var _current_matrix
+var _matrix_solved # The final solution
+var _current_matrix # What is displayed to the user
+var _correct_matrix # The cells that the user can be sure are correct
 var _size
 var _cells_matrix = []
 var _cells_preview = []
@@ -87,7 +88,8 @@ func load_matrix():
 	var puzzle = puzzles[randi() % puzzles.size()]
 
 	_matrix_solved = puzzle.full
-	_current_matrix = puzzle.empty
+	_current_matrix = puzzle.empty.duplicate()
+	_correct_matrix = puzzle.empty.duplicate()
 
 func initiate(level_number: int, grid_size: float, size: int, image_path: String, preview_size: int,
 	preview_gap: int, offset: float):
@@ -118,18 +120,28 @@ func check_new_position(cell_position: Vector2i):
 func remove_line(line):
 	print('Removing Line ' + str(line))
 	for column in range(_size):
-		var child = _cells_matrix[column * _size + line]
+		var index_cells = column * _size + line
+		var index_matrix = line * _size + column
+		_correct_matrix[index_matrix] = _current_matrix[index_matrix]
+		var child = _cells_matrix[index_cells]
 		if is_instance_valid(child) and child in get_children():
 			remove_child(child)
 			child.queue_free()
+	print('_correct_matrix')
+	printMatrix(_correct_matrix)
 		
 func remove_column(column):
 	print('Removing column ' + str(column))
 	for line in range(_size):
-		var child = _cells_matrix[column * _size + line]
+		var index_cells = column * _size + line
+		var index_matrix = line * _size + column
+		_correct_matrix[index_matrix] = _current_matrix[index_matrix]
+		var child = _cells_matrix[index_cells]
 		if is_instance_valid(child) and child in get_children():
 			remove_child(child)
 			child.queue_free()
+	print('_correct_matrix')
+	printMatrix(_correct_matrix)
 
 func update_position(btn: Node):
 	var new_cell_type = btn.get_cell_type()
@@ -164,3 +176,33 @@ func createPreview(level_number: int, preview_size: int, preview_gap: int):
 	generate_grid(preview_size, "", true, preview, 0)
 
 	_preview = preview
+
+	createPreviewResetButton(preview_size)
+
+func createPreviewResetButton(preview_size):
+	print('Creating Reset Button')
+	var button = Button.new()
+	button.custom_minimum_size = Vector2(preview_size, preview_size)
+	button.connect("pressed", Callable(self, "clearBoard"))
+	button.name = 'Reset Button'
+	_preview.add_child(button)
+	print('Button Created')
+
+func clearBoard():
+	print('Cleaning Board')
+	printMatrix(_correct_matrix)
+
+	for i in range(_size):
+		for j in range(_size):
+			var index1 = position_to_index(Vector2(i, j))
+			var index2 = position_to_index(Vector2(j, i))
+			print(index2)
+			var cell_type = _correct_matrix[index2]
+			print(cell_type)
+			var _cell_in_matrix = _cells_matrix[index1]
+			if is_instance_valid(_cell_in_matrix) and _cell_in_matrix in get_children():
+				_cell_in_matrix.set_cell_type(cell_type)
+			_cells_preview[index1].set_cell_type(cell_type)
+
+	_current_matrix = _correct_matrix.duplicate()
+	print('Board Cleard')
