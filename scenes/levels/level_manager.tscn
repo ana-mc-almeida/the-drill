@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_kf8ht"]
 [ext_resource type="Texture2D" uid="uid://dajvudpgrvwms" path="res://assets/bg_800x600.png" id="2_3l7xd"]
 [ext_resource type="Texture2D" uid="uid://cjkg4it16xujw" path="res://assets/drill.png" id="3_gmyb6"]
-[ext_resource type="Texture2D" uid="uid://c5jm75t7bsedi" path="res://icon.svg" id="3_x6vdy"]
 [ext_resource type="Script" path="res://scripts/drill.gd" id="4_wkk8s"]
+[ext_resource type="Texture2D" uid="uid://bmubnh0tqucqg" path="res://assets/drill3.1.png" id="5_tb7vu"]
 [ext_resource type="Texture2D" uid="uid://byl8vgnnoagsm" path="res://assets/paper2.png" id="6_x6med"]
 [ext_resource type="AudioStream" uid="uid://jbsghegilml3" path="res://sounds/game_music.wav" id="7_4vg2w"]
 [ext_resource type="AudioStream" uid="uid://kdgdwgyne7be" path="res://sounds/drill.wav" id="8_nojmp"]
@@ -40,8 +40,8 @@ position = Vector2(86, 329)
 texture = ExtResource("3_gmyb6")
 
 [node name="Drill" type="Sprite2D" parent="."]
-position = Vector2(91, 73)
-texture = ExtResource("3_x6vdy")
+position = Vector2(91, 180)
+texture = ExtResource("5_tb7vu")
 script = ExtResource("4_wkk8s")
 _max_distance = 440.0
 
