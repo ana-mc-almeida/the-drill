@@ -1,9 +1,7 @@
 name: Build and Release
 
 on:
-    push:
-        branches:
-            - main
+    push
 
 env:
   GODOT_VERSION: 4.3
