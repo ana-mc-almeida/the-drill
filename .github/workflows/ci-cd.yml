@@ -68,7 +68,6 @@ jobs:
             git push origin ${{ steps.version.outputs.version_tag }}
 
       - name: Download Exported Web Build
-        if: steps.version.outputs.version_type != 'none' && steps.version.outputs.changed != 'false'
         uses: actions/download-artifact@v4
         with:
           name: web
