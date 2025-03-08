@@ -4,12 +4,12 @@ on: push
 env:
   GODOT_VERSION: 4.3
   EXPORT_NAME: the-drill
-  PROJECT_PATH: the-drill
+  PROJECT_PATH: ./
 
 jobs:
     export-web:
         name: Web Export
-        runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+        runs-on: ubuntu-22.04
         container:
           image: barichello/godot-ci:4.3
         steps:
