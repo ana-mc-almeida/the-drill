@@ -59,7 +59,7 @@ jobs:
             echo "Changed output: ${{ steps.version.outputs.changed }}"
 
             if [[ "${{ steps.version.outputs.changed }}" == "false" ]]; then
-                cho "No changes detected. Skipping release."
+                echo "No changes detected. Skipping release."
                 exit 0  # Exit successfully without error
             fi
 
