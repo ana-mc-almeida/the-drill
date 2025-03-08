@@ -59,8 +59,8 @@ jobs:
             echo "Version Tag: ${{ steps.version.outputs.version_tag }}"  # Debugging output
             git fetch --tags
 
-            if git rev-parse "v${{ steps.version.outputs.version_tag }}" >/dev/null 2>&1; then
-                echo "Tag v${{ steps.version.outputs.version_tag }} already exists. Skipping release."
+            if git rev-parse "${{ steps.version.outputs.version_tag }}" >/dev/null 2>&1; then
+                echo "Tag ${{ steps.version.outputs.version_tag }} already exists. Skipping release."
                 exit 0  # Exit successfully without error if tag exists
             fi
 
