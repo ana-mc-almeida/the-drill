@@ -1,72 +1,51 @@
-name: Build and Deploy
+name: Deploy
 
-on: push
+on:
+    milestone:
+        types: [closed]
 
 env:
   GODOT_VERSION: 4.3
   EXPORT_NAME: the-drill
-  PROJECT_PATH: ./
+  PROJECT_PATH: ./godot
   ITCH_USERNAME: Crashim03
   ITCH_GAME_ID: the-drill
 
 jobs:
-  export-web:
-    name: Web Export
-    runs-on: ubuntu-22.04
-    container:
-      image: barichello/godot-ci:4.3
-    outputs:
-      artifact-path: ${{ steps.upload.outputs.artifact-path }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Web Build
-        run: |
-          mkdir -v -p build/web
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
-      - name: Upload Artifact
-        id: upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: web
-          path: build/web
-
-  version:
+  get-latest-release:
     runs-on: ubuntu-latest
-    needs: export-web
     outputs:
-      version_hash: ${{ steps.get_version.outputs.version_hash }}
+      version: ${{ steps.get_version.outputs.version }}
     steps:
-      - name: Get Version
+      - name: Get Latest Release Version
         id: get_version
-        run: echo "::set-output name=version_hash::$(date +%s)"
+        run: |
+          LATEST_VERSION=$(curl --silent "https://api.github.com/repos/${{ github.repository }}/releases/latest" | jq -r .tag_name)
+          echo "Latest version found: $LATEST_VERSION"
+          echo "version=$LATEST_VERSION" >> "$GITHUB_ENV"
+          echo "::set-output name=version::$LATEST_VERSION"
 
   deploy:
-    needs: [export-web, version]
     runs-on: ubuntu-latest
+    needs: get-latest-release
     strategy:
       fail-fast: true
       matrix:
         channel:
           - web
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download Web Build Artifact
+        uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.channel }}
           path: build/${{ matrix.channel }}
-      - uses: KikimoraGames/itch-publish@v0.0.3
+
+      - name: Deploy to Itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
           gameData: ./build/${{ matrix.channel }}
           itchUsername: ${{ env.ITCH_USERNAME }}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: ${{ matrix.channel }}
-          buildNumber: ${{ needs.version.outputs.version_hash }}
+          buildNumber: ${{ needs.get-latest-release.outputs.version }}

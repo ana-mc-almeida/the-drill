@@ -1,0 +1,97 @@
+name: Build and Release
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+  GODOT_VERSION: 4.3
+  EXPORT_NAME: the-drill
+  PROJECT_PATH: ./
+
+jobs:
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-22.04
+    container:
+      image: barichello/godot-ci:4.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web
+
+  release:
+    name: Automatic Release
+    runs-on: ubuntu-22.04
+    needs: export-web  # Ensure the release waits for the export to finish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
+    
+      - name: Application Version
+        id: version
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+            change_path: "godot"
+
+      - name: Create Git Tag
+        run: |
+            git tag ${{ steps.version.outputs.version_tag }}
+            git push origin ${{ steps.version.outputs.version_tag }}
+
+      - name: Download Exported Web Build
+        uses: actions/download-artifact@v4
+        with:
+          name: web
+          path: build/web
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            tag_name: ${{ steps.version.outputs.version_tag }}
+            release_name: "Release ${{ steps.version.outputs.version }}"
+            body: |
+              **Version:** ${{ steps.version.outputs.version }}
+              **Version Type:** ${{ steps.version.outputs.version_type }}
+              **Changes Since Last Version:** ${{ steps.version.outputs.changed }}
+              **Authors:** ${{ steps.version.outputs.authors }}
+              **Previous Version:** ${{ steps.version.outputs.previous_version }}
+            draft: false
+            prerelease: false
+
+      - name: Zip Web Build
+        run: |
+          cd build/web
+          zip -r ../web.zip .
+
+      - name: Upload Exported Web Build to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/web.zip
+          asset_name: web.zip
+          asset_content_type: application/zip
