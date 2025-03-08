@@ -55,12 +55,14 @@ jobs:
             change_path: "godot"
 
       - name: Check if New Version Exists
-        id: check_version
         run: |
-          if [[ -z "${{ steps.version.outputs.version_tag }}" ]]; then
-            echo "No new version detected. Skipping release."
-            exit 0  # Exit successfully without error
-          fi
+            echo "Version Tag: ${{ steps.version.outputs.version_tag }}"  # Debugging output
+            git fetch --tags
+
+            if git rev-parse "v${{ steps.version.outputs.version_tag }}" >/dev/null 2>&1; then
+                echo "Tag v${{ steps.version.outputs.version_tag }} already exists. Skipping release."
+                exit 0  # Exit successfully without error if tag exists
+            fi
 
       - name: Create Git Tag
         run: |
