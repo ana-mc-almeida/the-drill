@@ -1,0 +1,51 @@
+name: Deploy
+
+on:
+    milestone:
+        types: [closed]
+
+env:
+  GODOT_VERSION: 4.3
+  EXPORT_NAME: the-drill
+  PROJECT_PATH: ./godot
+  ITCH_USERNAME: Crashim03
+  ITCH_GAME_ID: the-drill
+
+jobs:
+  get-latest-release:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - name: Get Latest Release Version
+        id: get_version
+        run: |
+          LATEST_VERSION=$(curl --silent "https://api.github.com/repos/${{ github.repository }}/releases/latest" | jq -r .tag_name)
+          echo "Latest version found: $LATEST_VERSION"
+          echo "version=$LATEST_VERSION" >> "$GITHUB_ENV"
+          echo "::set-output name=version::$LATEST_VERSION"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: get-latest-release
+    strategy:
+      fail-fast: true
+      matrix:
+        channel:
+          - web
+    steps:
+      - name: Download Web Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.channel }}
+          path: build/${{ matrix.channel }}
+
+      - name: Deploy to Itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: ./build/${{ matrix.channel }}
+          itchUsername: ${{ env.ITCH_USERNAME }}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: ${{ matrix.channel }}
+          buildNumber: ${{ needs.get-latest-release.outputs.version }}
