@@ -21,7 +21,6 @@ jobs:
       fail-fast: true
       matrix:
         channel:
-          - windows
           - webgl
     name: Deploy - Itch.io ${{ matrix.channel }}
     steps:
