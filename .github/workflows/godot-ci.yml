@@ -2,7 +2,7 @@ name: Deploy
 
 on:
     milestone:
-        types: [closed]
+        types: [deleted, closed]
 
 env:
   GODOT_VERSION: 4.3
