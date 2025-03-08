@@ -7,7 +7,7 @@ env:
   EXPORT_NAME: the-drill
   PROJECT_PATH: ./
   ITCH_USERNAME: Crashim03
-  ITCH_GAME_ID: speedjam-9
+  ITCH_GAME_ID: the-drill
 
 jobs:
   export-web:
