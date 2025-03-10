@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: web
-          path: build/web
+          path: ./build/web
 
   deploy:
     name: Deploy
@@ -48,20 +48,13 @@ jobs:
     container:
       image: barichello/godot-ci:4.3
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Download Exported Web Build
         uses: actions/download-artifact@v4
         with:
           name: web
-          path: build/web
-      - name: Install rsync
-        run: apt-get update && apt-get install -y rsync
+          path: ./build/web
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: 14-deploy-to-github-pages
-          FOLDER: build/web
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
