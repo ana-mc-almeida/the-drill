@@ -11,6 +11,8 @@ For this to work, commit patterns must be followed:
 
 Note that the version will increment for **every** commit that contains this pattern and modifies the game folder.  
 
+Every commit on the `main` branch will be deployed to [github pages](https://ana-mc-almeida.github.io/the-drill/).
+
 ## Pull requests
 
 To simplify the process of commiting with the right patterns, squashing the commits in the pull request is recommended. This way, the title of the pull request can be the only commit to follow the pattern above described.
