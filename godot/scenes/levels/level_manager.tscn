@@ -54,6 +54,12 @@ texture = ExtResource("5_tb7vu")
 script = ExtResource("4_wkk8s")
 _max_distance = 440.0
 
+[node name="Start" type="Node2D" parent="Drill"]
+position = Vector2(0, -31)
+
+[node name="End" type="Node2D" parent="Drill"]
+position = Vector2(-3, 288)
+
 [node name="Paper" type="Sprite2D" parent="."]
 position = Vector2(687, 389)
 texture = ExtResource("6_x6med")
