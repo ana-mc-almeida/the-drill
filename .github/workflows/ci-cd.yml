@@ -58,6 +58,8 @@ jobs:
         uses: paulhatch/semantic-version@v5.4.0
         with:
             change_path: "godot"
+            major_pattern: "(Major)"
+            minor_pattern: "(Feat)"
 
       - name: Create Git Tag
         if: steps.version.outputs.version_type != 'none' && steps.version.outputs.changed != 'false'
